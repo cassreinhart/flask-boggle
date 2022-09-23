@@ -1,0 +1,26 @@
+h1 {
+    font-family: 'Candal', sans-serif;
+    font-size: 5rem;
+    text-align: center;
+}
+table, td {
+    border: 1px solid navy;
+    font-size: 2.5rem;
+    text-align: center;
+    width: 4rem;
+    font-family: 'Candal', sans-serif;
+    margin: 8% 38%;
+}
+table {
+    border: 3px solid #ffd633;
+    border-radius: 9px;
+    background-color: #248f8f;
+    padding: 7px;
+}
+td {
+    background-color: #f2f2f2;
+    width: 3rem;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
