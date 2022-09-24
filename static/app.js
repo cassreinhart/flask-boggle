@@ -1,16 +1,16 @@
-const $form = $("add-word");
-const $timer = $("timer");
+const $form = $(".add-word");
+const $timer = $(".timer");
 
 async function post_word(evt) {
     evt.preventDefault();
     button = evt.target;
     let word = $('.word').val()
     
-    await axios.post("localhost:5000/", {word});
-    console.log('DONE!')
+    let response = await axios.post("http://127.0.0.1:5000/check-word", {word});
+    console.log('DONE!', response)
 }
 
-$form.on('submit', post_word);
+$form.on('submit',  post_word);
 
 function timer() {
     //time 

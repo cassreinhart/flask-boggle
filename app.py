@@ -1,5 +1,5 @@
 from boggle import Boggle
-from flask import Flask, session, flash, render_template, request
+from flask import Flask, session, flash, render_template, request, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -19,14 +19,14 @@ def show_home_page():
     return render_template('index.html', board=board, highscore=highscore, num_plays=num_plays) #not passing in board since it is in session dict
 
 
-@app.route('/check-word')
+@app.route('/check-word', methods=['POST'])
 def check_word():
     """handle submission of word"""
-    word = request.args['word']
+    word = request.json['word']
     board = session['board']
     result = boggle_game.check_valid_word(board, word)
     
-    return jsonify({'result': response})
+    return jsonify({'result': result})
 
 @app.route('/update-score', methods=['POST'])
 def update_score():
