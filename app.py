@@ -10,27 +10,32 @@ boggle_game = Boggle()
 
 @app.route('/')
 def show_home_page():
+    """show home page and store data to sessions"""
     board = boggle_game.make_board();
     session['board'] = board
+    highscore = session.get('highscore', 0)
+    num_plays = session.get('num_plays', 0)
 
-    return render_template('board.html', board=board) #not passing in board since it is in session dict
-
-@app.route('/board-session') #do I need to do a separate view fn for adding to session????????
-def handle_sessions_board():
-    """save board to session"""
-
-    session['board'] = board
+    return render_template('index.html', board=board, highscore=highscore, num_plays=num_plays) #not passing in board since it is in session dict
 
 
-@app.route('/submit-guess', methods=['POST'])
-def submit_guess():
-    """handle submission of user guess"""
-    if boggle_game.check_valid_word == 'ok':
-        return redirect('/')
-    else:
-        msg = boggle_game.check_valid_word
-        flash(msg, error)
+@app.route('/check-word')
+def check_word():
+    """handle submission of word"""
+    word = request.args['word']
+    board = session['board']
+    result = boggle_game.check_valid_word(board, word)
+    
+    return jsonify({'result': response})
 
-@app.route('/redirect') #not sure where to go with this....
-def redirect_to_something():
-    """need to redirect after submission????"""
+@app.route('/update-score', methods=['POST'])
+def update_score():
+    """receive score, update scoreboard"""
+    score = request.json['score']
+    highscore = session.get('highscore', 0)
+    num_plays = session.get('num_plays', 0)
+
+    session["num_plays"] = num_plays + 1
+    session['highscore'] = max(score, highscore)
+
+    return jsonify(newHighScore = score > highscore)
