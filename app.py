@@ -22,6 +22,7 @@ def show_home_page():
 @app.route('/check-word', methods=['POST'])
 def check_word():
     """handle submission of word"""
+
     word = request.json['word']
     board = session['board']
     result = boggle_game.check_valid_word(board, word)
@@ -31,6 +32,7 @@ def check_word():
 @app.route('/update-score', methods=['POST'])
 def update_score():
     """receive score, update scoreboard"""
+    
     score = request.json['score']
     highscore = session.get('highscore', 0)
     num_plays = session.get('num_plays', 0)
