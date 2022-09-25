@@ -26,9 +26,11 @@
     {% endfor %}
     </tbody>
 </table>
-<p>Highscore: <b>{{highscore}}</b> in {{num_plays}} plays</p>
-<p>Time Left: <b class="timer"></b></p>
-<p class="messages"></p>
+<section class="game-info">
+    <p>Highscore: <b>{{highscore}}</b> in {{num_plays}} plays</p>
+    <p>Time Left: <b class="timer"></b></p>
+    <p class="messages"></p>
+</section>
 <ul class="list"></ul>
 
 <form class="add-word" method="POST">
