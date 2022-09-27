@@ -22,9 +22,10 @@ class Boggle():
         """Make and return a random boggle board."""
 
         board = []
+        vowels = 'aeiou'
 
         for y in range(5):
-            row = [choice(string.ascii_uppercase) for i in range(5)] #makes a list of random UPPERCASE characters
+            row = [choice(string.ascii_uppercase) for i in range(3)] + [choice(vowels) for i in range(2)] #makes a list of random UPPERCASE characters
             board.append(row) # adds random char row to board
 
         return board
