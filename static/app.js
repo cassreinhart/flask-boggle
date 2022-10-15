@@ -42,11 +42,15 @@ function startTimer(){
     
     $('.timer').text(time + 's');
     if (time === 0) {
-        $('.timer').text('TIME UP!!!')
-        clearInterval(1);
-        endGame();
+        endTimer();
     }
 }, 1000);} //wrap in a function
+
+function endTimer() {
+    $('.timer').text('TIME UP!!!')
+        clearInterval(1);
+        endGame();
+};
 
 async function postWord(word) {
     $('.messages').text('');
@@ -72,75 +76,79 @@ async function postScore(score) {
 
 }
 
-class BoggleGame {
-    constructor(time = 60) {
-        this.time = time;
-        this.startTimer();
-        this.timer = setInterval(this.tick.bind(this), 1000); //start interval once instantiated
-        this.score = 0;
-        this.words = new Set();
+// class BoggleGame {
+//     constructor(time = 60) {
+//         this.time = time;
+//         this.startTimer();
+//         this.timer = setInterval(this.tick.bind(this), 1000); //start interval once instantiated
+//         this.score = 0;
+//         this.words = new Set();
 
-        $form.on('submit', this.handleSubmit);
+//         $form.on('submit', this.handleSubmit);
 
-        $('.new-game').on('click', startGame);
-        // $(".add-word", this.board).on('submit', this.handleSubmit.bind(this));
-    }
+//         $('.new-game').on('click', startGame);
+//         // $(".add-word", this.board).on('submit', this.handleSubmit.bind(this));
+//     }
 
-    handleSubmit(evt) {
-        evt.preventDefault();
-        button = evt.target;
-        let word = $('.word').val()
+//     handleSubmit(evt) {
+//         evt.preventDefault();
+//         button = evt.target;
+//         let word = $('.word').val()
         
-        this.postWord(word);
-    }
-    startGame() {
-        $('.new-game').hide();
-        $('.add-word').show();
-        this.time = 60;
-        this.score = 0;
-    }
+//         this.postWord(word);
+//     }
+//     startGame() {
+//         $('.new-game').hide();
+//         $('.add-word').show();
+//         this.time = 60;
+//         this.score = 0;
+//     }
     
-    endGame(){
-        $(".add-word").hide();
-        $('.messages').text(`Your Score: ${score}`);
-        $('.new-game').show();
+//     endGame(){
+//         $(".add-word").hide();
+//         $('.messages').text(`Your Score: ${score}`);
+//         $('.new-game').show();
     
-        this.postScore(score);
-    }
+//         this.postScore(score);
+//     }
     
-    startTimer(){
-        setInterval(function() {
-        this.time -= 1;
+//     startTimer(){
+//         setInterval(function() {
+//         this.time -= 1;
         
-        $('.timer').text(this.time + 's');
-        if (this.time <= 0) {
-            $('.timer').text('TIME UP!!!')
-            clearInterval(1);
-            this.endGame();
-        }
-    }, 1000);}
+//         $('.timer').text(this.time + 's');
+//         if (this.time <= 0) {
+//             endTimer()
+//         }
+//     }, 1000);}
+
+//     endTimer() {
+//         $('.timer').text('TIME UP!!!')
+//             clearInterval(1);
+//             endGame();
+//     };
     
-    async post_word(word) {
-        $('.messages').text('');
+//     async post_word(word) {
+//         $('.messages').text('');
     
-        let response = await axios.post("/check-word", {word});
+//         let response = await axios.post("/check-word", {word});
     
-        $('.messages').text(response.data.result);
-        if (response.data.result === 'ok') {
-            score += word.length;
+//         $('.messages').text(response.data.result);
+//         if (response.data.result === 'ok') {
+//             score += word.length;
     
-            $('ul').append(`<li>${word}</li>`);
-        }
-    }
+//             $('ul').append(`<li>${word}</li>`);
+//         }
+//     }
     
-    //////////////////how to use event listeners in a class?
-    // $form.on('submit', handleSubmit);
+//     //////////////////how to use event listeners in a class?
+//     // $form.on('submit', handleSubmit);
     
-    // $('.new-game').on('click', startGame)
+//     // $('.new-game').on('click', startGame)
     
-    async postScore(score) {
+//     async postScore(score) {
         
-        let response = await axios.post('/update-score', {score}); 
-        // console.log('done', response) //////////////////should this function do more?
-    }
-}
+//         let response = await axios.post('/update-score', {score}); 
+//         // console.log('done', response) //////////////////should this function do more?
+//     }
+// }

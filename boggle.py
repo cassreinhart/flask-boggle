@@ -22,7 +22,7 @@ class Boggle():
         """Make and return a random boggle board."""
 
         board = []
-        vowels = 'aeiou'
+        vowels = 'AEIOU' #previous logic did not utilize enough vowels, so I added more in line 28
 
         for y in range(5):
             row = [choice(string.ascii_uppercase) for i in range(3)] + [choice(vowels) for i in range(2)] #makes a list of random UPPERCASE characters
@@ -141,6 +141,5 @@ class Boggle():
                     return True
 
         # We've tried every path from every starting square w/o luck.
-        # Sad panda.
 
         return False
