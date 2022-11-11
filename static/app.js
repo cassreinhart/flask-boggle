@@ -3,15 +3,14 @@ const $timer = $(".timer");
 let time;
 let score;
 let words;
+let id;
 
-startGame();
+$('.add-word').hide();
 
 function handleSubmit(evt) {
     evt.preventDefault();
     button = evt.target;
-    let word = $('.word').val()
-    
-    $('.word').val('');
+    let word = $('.word').val().toLowerCase();
 
     if (!words.has(word)){
         words.add(word);
@@ -37,7 +36,7 @@ function endGame(){
 }
 
 function startTimer(){
-    setInterval(function() {
+    id = setInterval(function() {
     time -= 1;
     
     $('.timer').text(time + 's');
@@ -48,7 +47,7 @@ function startTimer(){
 
 function endTimer() {
     $('.timer').text('TIME UP!!!')
-        clearInterval(1);
+        clearInterval(id);
         endGame();
 };
 
@@ -67,12 +66,12 @@ async function postWord(word) {
 
 $form.on('submit', handleSubmit);
 
-$('.new-game').on('click', startGame)
+$('.new-game').on('click', startGame);
 
 async function postScore(score) {
     
     let response = await axios.post('/update-score', {score}); 
-    // console.log('done', response)
+    console.log('done', response)
 
 }
 

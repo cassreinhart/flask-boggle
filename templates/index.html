@@ -17,21 +17,24 @@
     <table class="main">
         <thead></thead>
         <tbody>
-    {% for row in board %}
-        <tr>
-            {% for char in row %}
-            <td>{{char}}</td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        {% for row in board %}
+            <tr>
+                {% for char in row %}
+                <td>{{char}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 <section class="game-info">
-    <p>Highscore: <b>{{highscore}}</b> in {{num_plays}} plays</p>
-    <p>Time Left: <b class="timer"></b></p>
-    <p class="messages"></p>
+    <div>
+        <p>Highscore: <b>{{highscore}}</b> in {{num_plays}} plays</p>
+        <p>Time Left: <b class="timer"></b></p>
+        <p class="messages"></p>
+    </div>
+    <ul class="list"></ul>
 </section>
-<ul class="list"></ul>
+
 
 <form class="add-word" method="POST">
         <input type="text" name="word" class="word" placeholder="Word">
