@@ -2,7 +2,7 @@ h1 {
     font-family: 'Candal', sans-serif;
     font-size: 5rem;
     text-align: center;
-    /* margin: 1rem; */
+    margin-bottom: 1rem;
 }
 table, td {
     border: 1px solid rgb(16, 16, 16);
@@ -31,6 +31,11 @@ td, li {
 
     /* margin-left: 40%; */
     /* padding-top: 4%; */
+}
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 button {
     padding: .75rem 1.5rem;
